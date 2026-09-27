@@ -1,8 +1,12 @@
 import database
+import newprod
+
+insert = newprod.new
 dbinsert = database.insert
 dbshow = database.select
 dbupdate = database.update
 dbdelete = database.delete
+
 def main():
     while True:
         print("1. Añadir")
@@ -11,10 +15,7 @@ def main():
         Op=int(input(""))
             
         if Op == 1:
-            Nm = input("Ingrese el Mamañema ")
-            pr= input("Ingrese el tamaño de la ñema ")
-            dbinsert(Nm, pr)
-            input("Allgood")
+            insert()
         elif Op == 2:
             print(dbshow())
             input("presiona enter para continuar ")
@@ -27,7 +28,3 @@ def main():
             break
 
 main()
-            
-            
-            
-         

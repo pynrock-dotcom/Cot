@@ -1,5 +1,5 @@
 import sqlite3
-conexion = sqlite3.connect('Velazcres')
+conexion = sqlite3.connect('Velazcres.db')
 cursorBD = conexion.cursor()
 
 def tableexist(nombreTabla):
@@ -7,17 +7,14 @@ def tableexist(nombreTabla):
     if cursorBD.fetchone()[0] == 1:
         return True
     else:
-        cursorBD.execute('''CREATE TABLE PRODUCTOENTRY (CODIGO INTEGER PRIMARY KEY AUTOINCREMENT, NOMBRE TEXT, PRECIODIVISAS REAL, GANANCIA REAL)''')
+        cursorBD.execute('''CREATE TABLE PRODUCTO (CODIGO INTEGER PRIMARY KEY AUTOINCREMENT, NOMBRE TEXT, PRECIO REAL, TASAPAGO REAL, GANANCIA REAL, PRECIOVENTA REAL)''')
     return False
 
 tableexist('PRODUCTO')
 
-def insert(nombre, precio):
-    cursorBD.execute('''INSERT INTO PRODUCTO (NOMBRE, PRECIO) VALUES (?,?)''', (nombre, precio))
+def insert(nombre, precio, tasapago, ganancia, precioventa):
+    cursorBD.execute('''INSERT INTO PRODUCTO (NOMBRE, PRECIO, TASAPAGO, GANANCIA, PRECIOVENTA) VALUES (?,?,?,?,?)''', (nombre, precio, tasapago, ganancia, precioventa))
     conexion.commit()
-# insert('20w40', 50)
-# insert('mamañema', 50)
-# insert('mamacoña', 50)
 
 def select():
     cursorBD.execute('''SELECT * FROM PRODUCTO''')
