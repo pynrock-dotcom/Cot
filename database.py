@@ -25,13 +25,13 @@ def select():
 
 
 def update(codigo, diccionario):
-    VV = ['NOMBRE', 'PRECIO']
+    VV = ['NOMBRE', 'PRECIO', 'TASAPAGO', 'GANACIA', 'PRECIOVENTA']
     for key in diccionario.keys():
         if key not in VV:
             raise Exception('Esa columna no existe')
         else:
-            cursorBD.execute('''UPDATE PRODUCTO SET {} = '{}' WHERE CODIGO = {} '''.format(key, diccionario[key], codigo))
-    conexion.commit
+            cursorBD.execute(f"'''UPDATE PRODUCTO SET {key} = ? WHERE CODIGO = ? '''(valor, codigo)")
+    conexion.commit()
 
 def delete(codigo):
     cursorBD.execute('''DELETE FROM PRODUCTO WHERE CODIGO = {} '''.format(codigo))
